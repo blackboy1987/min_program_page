@@ -7,7 +7,7 @@ export default {
         name: '概况',
       },
       {
-        path: '/admin/sub-page1',
+        path: '/baseSetting',
         name: '基本设置',
       },
       {

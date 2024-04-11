@@ -1,8 +1,13 @@
 import {Button, message, Upload, UploadProps} from "antd";
 import {UploadOutlined} from "@ant-design/icons";
 import {Constants} from "@/util/constants";
+import React from "react";
 
-const ImageUpload = () =>{
+type ImageUploadProps = {
+  title?: string;
+}
+
+const ImageUpload:React.FC<ImageUploadProps> = ({title='选择文件'}) =>{
 
   const props: UploadProps = {
     name: 'file',
@@ -25,7 +30,7 @@ const ImageUpload = () =>{
   return (
     <Upload {...props}>
       <Button icon={<UploadOutlined />} type='primary' style={{borderRadius:0,boxSizing:'inherit'}}>
-        aaa
+        {title}
       </Button>
     </Upload>
 

@@ -30,8 +30,7 @@ export default [
   },
   {
     path: '/app',
-    name: 'app',
-    icon: 'app',
+    name: '应用管理',
     routes: [
       {
         path: '/app',

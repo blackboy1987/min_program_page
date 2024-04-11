@@ -6,7 +6,9 @@ import {detail} from '../../service';
 import _defaultProps from "@/pages/app/components/Setting/_defaultProps";
 import defaultProps from './_defaultProps';
 import AccessToken from "./components/AccessToken";
+import BaseSetting from "./components/BaseSetting";
 import Income from "@/pages/app/components/Setting/components/Income";
+import Member from "@/pages/app/components/Setting/components/Member";
 
 
 type SettingProps = {
@@ -144,7 +146,13 @@ const Index: React.FC<SettingProps> = ({appId,onClose}) => {
               >
                 <ProCard>
                   {
+                    pathname==='/baseSetting' ? <BaseSetting appId={appInfo.id} /> : null
+                  }
+                  {
                     pathname==='/accessToken' ? <AccessToken appId={appInfo.id} /> : null
+                  }
+                  {
+                    pathname==='/member' ? <Member appId={appInfo.id} /> : null
                   }
                   {
                     pathname==='/income' ? <Income appId={appInfo.id} /> : null

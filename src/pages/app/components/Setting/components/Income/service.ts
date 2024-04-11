@@ -2,7 +2,7 @@ import {request} from '@umijs/max';
 import {Constants} from '@/util/constants';
 
 export async function list(body: Record<string, any>, options?: { [key: string]: any }) {
-  return request(Constants.apiUrl + 'token/list', {
+  return request(Constants.baseUrl + 'token/list', {
     method: 'POST',
     data: {
       ...body,
@@ -19,7 +19,7 @@ export async function list(body: Record<string, any>, options?: { [key: string]:
 }
 
 export async function pull(body: Record<string, any>, options?: { [key: string]: any }) {
-  return request(Constants.apiUrl + 'token/pull', {
+  return request(Constants.baseUrl + 'token/pull', {
     method: 'POST',
     data: body,
     ...(options || {}),
