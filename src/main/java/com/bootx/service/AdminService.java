@@ -2,6 +2,7 @@
 package com.bootx.service;
 
 import com.bootx.entity.Admin;
+import com.bootx.entity.App;
 
 /**
  * @author black
@@ -32,4 +33,6 @@ public interface AdminService extends BaseService<Admin, Long> {
 	void lock(Admin admin);
 
 	void unLock(Admin admin);
+
+    boolean check(Admin admin, App app);
 }

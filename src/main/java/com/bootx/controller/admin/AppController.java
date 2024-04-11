@@ -6,14 +6,14 @@ import com.bootx.common.Result;
 import com.bootx.entity.Admin;
 import com.bootx.entity.App;
 import com.bootx.security.CurrentUser;
+import com.bootx.service.AdminService;
 import com.bootx.service.AppService;
-import com.bootx.util.DateUtils;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +26,9 @@ public class AppController{
 
     @Resource
     private AppService appService;
+
+    @Resource
+    private AdminService adminService;
 
     @PostMapping("/list")
     public Result list(Pageable pageable,String appName){
@@ -62,4 +65,42 @@ public class AppController{
         }
         return Result.success(data);
     }
+
+
+    @PostMapping("/base")
+    public Result base(Long id,@CurrentUser Admin admin){
+        App app = appService.find(id);
+        /*if(app==null){
+            return Result.error("应用不存在");
+        }
+        if(!adminService.check(admin,app)){
+            return Result.error("非法访问");
+        }*/
+
+        Map<String,Object> data = new HashMap<>(16);
+        data.put("id", app.getId());
+        data.put("appName", app.getAppName());
+        data.put("appLogo",app.getAppLogo());
+        data.put("appId", app.getAppId());
+        data.put("appSecret", app.getAppSecret());
+        data.put("status", app.getStatus());
+
+        return Result.success(data);
+    }
+
+    @PostMapping("/baseUpdate")
+    public Result baseUpdate(Long id,String appId,String appLogo,String appName,String appSecret,Integer status){
+        if(status==null){
+            status = 1;
+        }
+        App app = appService.find(id);
+        app.setAppSecret(appSecret);
+        app.setAppLogo(appLogo);
+        app.setAppName(appName);
+        app.setStatus(status);
+        app.setAppId(appId);
+        appService.update(app);
+        return Result.success("操作成功");
+    }
+
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -43,6 +44,10 @@ public class Admin extends User {
      */
     @Column(nullable = false)
     private String encodedPassword;
+
+    @NotNull
+    @Column(nullable = false)
+    private Boolean isAdmin;
 
 
     /**
@@ -105,8 +110,13 @@ public class Admin extends User {
         this.encodedPassword = encodedPassword;
     }
 
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
 
-
+    public void setIsAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
 
     @Transient
     @Override
